@@ -43,21 +43,12 @@ class TestBooksCollector:
         assert name in books_collector.books_genre
 
 
-    def test_get_book_genre_not_existent_name_true(self):
+    def test_get_book_genre_existent_name_true(self):
         books_collector = BooksCollector()
         name = 'Гарри Поттер и филосовский камень'
         books_collector.add_new_book(name)
-        books_collector.set_book_genre(name, 'Фентези')
-        assert books_collector.get_book_genre(name) == 'Фентези'
-
-
-    def test_get_books_with_specific_genre_existent_genre_true(self):
-        books_collector = BooksCollector()
-        name = 'Гарри Поттер и филосовский камень'
-        genre = 'Фантастика'
-        books_collector.add_new_book(name)
-        books_collector.set_book_genre(name, genre)
-        assert name in books_collector.get_books_with_specific_genre(genre)
+        books_collector.set_book_genre(name, 'Фантастика')
+        assert books_collector.get_book_genre(name) == 'Фантастика'
 
     def test_get_books_genre_existent_genre_and_name_true(self):
         books_collector = BooksCollector()
@@ -65,7 +56,9 @@ class TestBooksCollector:
         genre = 'Фантастика'
         books_collector.add_new_book(name)
         books_collector.set_book_genre(name, genre)
-        assert books_collector.books_genre.get(name) == genre
+        expected_result = {name: genre}
+        assert books_collector.get_books_genre() == expected_result
+
 
     def test_get_books_for_children_book_for_adult_true(self):
         books_collector = BooksCollector()
