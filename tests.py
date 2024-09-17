@@ -50,6 +50,14 @@ class TestBooksCollector:
         books_collector.set_book_genre(name, 'Фантастика')
         assert books_collector.get_book_genre(name) == 'Фантастика'
 
+    def test_get_books_with_specific_genre_existent_genre_true(self):
+        books_collector = BooksCollector()
+        name = 'Гарри Поттер и филосовский камень'
+        genre = 'Фантастика'
+        books_collector.add_new_book(name)
+        books_collector.set_book_genre(name, genre)
+        assert books_collector.get_books_with_specific_genre(genre) == [name]
+
     def test_get_books_genre_existent_genre_and_name_true(self):
         books_collector = BooksCollector()
         name = 'Гарри Поттер и филосовский камень'
@@ -96,7 +104,7 @@ class TestBooksCollector:
         books_collector.add_new_book(name)
         books_collector.set_book_genre(name, genre)
         books_collector.add_book_in_favorites(name)
-        assert books_collector.favorites == [name]
+        assert books_collector.get_list_of_favorites_books() == [name]
 
 
 
